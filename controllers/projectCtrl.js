@@ -1,4 +1,4 @@
-app.controller("projectCtrl", function ($route, $scope, HttpRequest) {
+app.controller("projectCtrl", function ($route, $scope, HttpRequest, $http) {
     //Variable
 
 
@@ -12,21 +12,21 @@ app.controller("projectCtrl", function ($route, $scope, HttpRequest) {
     $scope.masterFaktorUji = false;
     //Form Load ======================================================================
     $scope.formLoad = function () {
-        try {
-            $scope.currentUser = JSON.parse($cookies.get('currentUser'));
-        } catch (err) {
-            $scope.currentUser = {};
-        }
+        // try {
+        //     $scope.currentUser = JSON.parse($cookies.get('currentUser'));
+        // } catch (err) {
+        //     $scope.currentUser = {};
+        // }
         // alert("testing");
         // $('#komitmenkepatuhan').attr('disabled', 'disabled').off('click');
 
         $scope.renderProject();
-        $scope.renderReminder();
+        // $scope.renderReminder();
     }
 
     $scope.renderReminder = function () {
         var apiUrl = "/api/Reminder";
-        HttpRequest.get(apiUrl).success(function (response) {
+        $http.get(apiUrl).success(function (response) {
             $scope.listReminder = response;
             console.log(JSON.stringify($scope.listReminder));
 
@@ -36,9 +36,10 @@ app.controller("projectCtrl", function ($route, $scope, HttpRequest) {
         NProgress.start();
         $('.Loading').show();
         $('.page-form').hide();
-        var apiUrl = "/listProject";
-        HttpRequest.get(apiUrl).success(function (response) {
-            $scope.listProject = response;
+        var apiUrl = "http://localhost:3000/listProject";
+        $http.get(apiUrl).then(function (response) {
+            $scope.listProject = response.data;
+            console.log(JSON.stringify($scope.listProject));
 
 
             $('.Loading').hide();
@@ -53,9 +54,9 @@ app.controller("projectCtrl", function ($route, $scope, HttpRequest) {
         $scope.masterFaktorUji = false;
 
         $scope.idIndikator = idIndikator;
-        var apiUrl = "/listKegiatan";
-        HttpRequest.get(apiUrl).success(function (response) {
-            $scope.listKegiatan = response;
+        var apiUrl = "http://localhost:3000/listKegiatan";
+        $http.get(apiUrl).then(function (response) {
+            $scope.listKegiatan = response.data;
             console.log(JSON.stringify($scope.listKegiatan));
 
         })
@@ -66,17 +67,18 @@ app.controller("projectCtrl", function ($route, $scope, HttpRequest) {
         $scope.masterIndikator = false;
         $scope.masterFaktorUji = true;
 
-        var apiUrl = "/api/MasterFaktorUji/" + idParameter + "?type=Parameter";
+        // var apiUrl = "/api/MasterFaktorUji/" + idParameter + "?type=Parameter";
+        var apiUrl = "http://localhost:3000/listSubKegiatan";
         // console.log(apiUrl);
 
-        HttpRequest.get(apiUrl).success(function (response) {
-            $scope.listFaktorUji = response.dataFaktorUji;
+        $http.get(apiUrl).then(function (response) {
+            $scope.listFaktorUji = response.data;
             $scope.idIndikator = response.idIndikator;
             $scope.idParameter = idParameter
             // console.log("idindikator=", $scope.idIndikator);
             // console.log("idParameter=", $scope.idParameter);
 
-            // console.log(JSON.stringify($scope.listFaktorUji));
+            console.log(JSON.stringify($scope.listFaktorUji));
 
         })
     }

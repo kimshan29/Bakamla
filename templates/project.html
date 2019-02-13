@@ -1,9 +1,8 @@
-<div class="content ">
+<div class="content Loading">
     <div style="margin-top: 20%;">
         <p class="text-center">
-            <img class="blink-image" src="../icons/loading.ico">
+            <img class="blink-image" src="../icons/loading.gif">
         </p>
-        <!-- <p class="text-center">Loading......</p> -->
 
     </div>
 </div>
@@ -13,12 +12,11 @@
             Project
             <!-- <small>advanced tables</small> -->
         </h1>
-        <ol class="breadcrumb">
+        <!-- <ol class="breadcrumb">
             <li>
                 <i class="fa fa-home"></i> Home</li>
-            <!-- <li><a href="#"></a></li> -->
             <li class="active">Project</li>
-        </ol>
+        </ol> -->
     </section>
     <section class="content" ng-show="masterIndikator">
         <div class="row">
@@ -50,7 +48,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr dir-paginate="item in listProject |filter:search|itemsPerPage:pageSize" current-page="currentPage">
+                                <!-- <tr dir-paginate="item in listProject |filter:search|itemsPerPage:pageSize" current-page="currentPage"> -->
+                                <tr ng-repeat="item in listProject">
                                     <td class="text-center">{{pageSize * (currentPage-1)+$index+1}}</td>
                                     <td>{{item.namaProject }}</td>
                                     <td class="text-center">{{item.keterangan}}</td>
@@ -76,8 +75,8 @@
                             </tbody>
 
                         </table>
-                        <dir-pagination-controls class="pull-right" boundary-links="true" direction-links="true">
-                        </dir-pagination-controls>
+                        <!-- <dir-pagination-controls class="pull-right" boundary-links="true" direction-links="true">
+                        </dir-pagination-controls> -->
                         <div class="col-md-12 text-left">
                             <button data-toggle="modal" ng-click="eventClickAdd()" ng-hide="akses" data-target="#myModalIndikator" data-backdrop="static" data-keyboard="false" type="button" class="btn btn-default btn-circle btn-lg" style="color : white;background: #2d4283; border-color: #2d4283;  box-shadow: 0px 0px 31px 6px rgba(0, 0, 0, 0.17);">
                                 <i class="fa fa-plus faa-pulse animated"></i>
@@ -131,8 +130,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-delete" data-dismiss="modal" ng-click="eventClickCloseModal()">Close</button>
-                        <button type="button" class="btn btn-save" ng-disabled="!myformProject.$valid" ng-click="eventClickSaveIndikator()">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="eventClickCloseModal()">Close</button>
+                        <button type="button" class="btn btn-primary" ng-disabled="!myformProject.$valid" ng-click="eventClickSaveIndikator()">Save</button>
                     </div>
                 </div>
             </div>
@@ -145,12 +144,11 @@
             Kegiatan
             <!-- <small>advanced tables</small> -->
         </h1>
-        <ol class="breadcrumb">
+        <!-- <ol class="breadcrumb">
             <li>
                 <i class="fa fa-home"></i> Home</li>
-            <!-- <li><a href="#"></a></li> -->
             <li class="active"> Kegiatan</li>
-        </ol>
+        </ol> -->
     </section>
     <section class="content" ng-show="masterParameter">
         <div class="row">
@@ -184,7 +182,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr dir-paginate="item in listKegiatan |filter:search|itemsPerPage:pageSize" current-page="currentPage">
+                                <!-- <tr dir-paginate="item in listKegiatan |filter:search|itemsPerPage:pageSize" current-page="currentPage"> -->
+                                <tr ng-repeat="item in listKegiatan">
                                     <td class="text-center">{{pageSize * (currentPage-1)+$index+1}}</td>
                                     <td class="">{{item.namaProject}}</td>
                                     <td class="">{{item.kegiatan}}</td>
@@ -200,18 +199,18 @@
                                         <button type='button' class='btn btn-success btn-sm' ng-hide="akses" ng-click="eventClickViewFaktorUji(item.id)">
                                             <span class='fa fa-search'></span> View Sub Kegiatan
                                         </button>
-                                        <button type='button' class='btn btn-edit btn-sm' ng-hide="akses" ng-click="eventClickEditParameter(item.id)">
+                                        <button type='button' class='btn btn-info btn-sm' ng-hide="akses" ng-click="eventClickEditParameter(item.id)">
                                             <span class='fa fa-pencil'></span> Edit
                                         </button>
-                                        <button type='button' class='btn btn-delete btn-sm' ng-hide="akses" ng-click="eventClickHapusParameter(item.id, idIndikator)">
+                                        <button type='button' class='btn btn-danger btn-sm' ng-hide="akses" ng-click="eventClickHapusParameter(item.id, idIndikator)">
                                             <span class='fa fa-times-circle'></span> Hapus
                                         </button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <dir-pagination-controls class="pull-right" boundary-links="true" direction-links="true">
-                        </dir-pagination-controls>
+                        <!-- <dir-pagination-controls class="pull-right" boundary-links="true" direction-links="true">
+                        </dir-pagination-controls> -->
                         <div class="col-md-12 text-left">
                             <button data-toggle="modal" ng-hide="akses" ng-click="eventClickAddParameter(idIndikator)" data-target="#myModalParameter" data-backdrop="static" data-keyboard="false" type="button" class="btn btn-default btn-circle btn-lg" style="color : white;background: #2d4283; border-color: #2d4283;  box-shadow: 0px 0px 31px 6px rgba(0, 0, 0, 0.17);">
                                 <i class="fa fa-plus faa-pulse animated"></i>
@@ -270,8 +269,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-delete" data-dismiss="modal" ng-click="eventClickCloseModalParameter()">Close</button>
-                        <button type="button" class="btn btn-save" ng-disabled="!myFormParameter.$valid" ng-click="eventClickSaveParameter()">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="eventClickCloseModalParameter()">Close</button>
+                        <button type="button" class="btn btn-primary" ng-disabled="!myFormParameter.$valid" ng-click="eventClickSaveParameter()">Save</button>
                     </div>
                 </div>
 
@@ -284,12 +283,11 @@
             Sub Kegiatan
             <!-- <small>advanced tables</small> -->
         </h1>
-        <ol class="breadcrumb">
+        <!-- <ol class="breadcrumb">
             <li>
                 <i class="fa fa-home"></i> Home</li>
-            <!-- <li><a href="#"></a></li> -->
             <li class="active">Sub Kegiatan</li>
-        </ol>
+        </ol> -->
     </section>
     <section class="content">
         <div class="row" ng-show="masterFaktorUji">
@@ -312,33 +310,42 @@
                             <thead class="thead-gcg">
                                 <tr>
                                     <th class="text-center">No.</th>
-                                    <th class="text-center">Indikator</th>
-                                    <th class="text-center">Parameter</th>
-                                    <th class="text-center">No Faktor Uji</th>
-                                    <th class="text-center">Faktor Uji</th>
+                                    <th class="text-center">Kegiatan</th>
+                                    <th class="text-center">Sub Kegiatan</th>
+                                    <th class="text-center">Keterangan</th>
+                                    <th class="text-center">Anggaran</th>
+                                    <th class="text-center">PIC</th>
+                                    <th class="text-center">Tanggal Mulai</th>
+                                    <th class="text-center">Tanggal Selesai</th>
+                                    <th class="text-center">Progress</th>
                                     <th class="text-center" style="width:12%" ng-hide="akses">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr dir-paginate="item in listFaktorUji |filter:search|itemsPerPage:pageSize" current-page="currentPage">
+                                <!-- <tr dir-paginate="item in listFaktorUji |filter:search|itemsPerPage:pageSize" current-page="currentPage"> -->
+                                <tr ng-repeat="item in listFaktorUji">
                                     <td class="text-center">{{pageSize * (currentPage-1)+$index+1}}</td>
-                                    <td class="">{{item.indikator}}</td>
-                                    <td class="">{{item.parameter}}</td>
-                                    <td class="">{{item.noFaktorUji}}</td>
-                                    <td class="">{{item.faktorUji}}</td>
+                                    <td class="">{{item.kegiatan}}</td>
+                                    <td class="">{{item.subKegiatan}}</td>
+                                    <td class="">{{item.keterangan}}</td>
+                                    <td class="">{{item.anggaran | number:0}}</td>
+                                    <td class="">{{item.pic}}</td>
+                                    <td class="">{{item.tglMulai}}</td>
+                                    <td class="">{{item.tglSelesai}}</td>
+                                    <td class="">{{item.progress}}</td>
                                     <td class="text-center" ng-hide="akses">
-                                        <button type='button' class='btn btn-edit btn-sm' ng-hide="akses" ng-click="eventClickEditFaktorUji(item.id)">
+                                        <button type='button' class='btn btn-info btn-sm' ng-hide="akses" ng-click="eventClickEditFaktorUji(item.id)">
                                             <span class='fa fa-pencil'></span> Edit
                                         </button>
-                                        <button type='button' class='btn btn-delete btn-sm' ng-hide="akses" ng-click="eventClickHapusFaktorUji(item.id, idParameter)">
+                                        <button type='button' class='btn btn-danger btn-sm' ng-hide="akses" ng-click="eventClickHapusFaktorUji(item.id, idParameter)">
                                             <span class='fa fa-times-circle'></span> Hapus
                                         </button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <dir-pagination-controls class="pull-right" boundary-links="true" direction-links="true">
-                        </dir-pagination-controls>
+                        <!-- <dir-pagination-controls class="pull-right" boundary-links="true" direction-links="true">
+                        </dir-pagination-controls> -->
                         <div class="col-md-12 text-left">
                             <button data-toggle="modal" ng-hide="akses" ng-click="eventClickAddFaktorUji(idIndikator,idParameter)" data-target="#myModalFaktorUji" data-backdrop="static" data-keyboard="false" type="button" class="btn btn-default btn-circle btn-lg" style="color : white;background: #2d4283; border-color: #2d4283;  box-shadow: 0px 0px 31px 6px rgba(0, 0, 0, 0.17);">
                                 <i class="fa fa-plus faa-pulse animated"></i>
@@ -459,8 +466,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-delete" data-dismiss="modal" ng-click="eventClickCloseModalFaktorUji()">Close</button>
-                        <button type="button" class="btn btn-save" ng-disabled="false" ng-click="eventClickSaveFaktorUji()">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="eventClickCloseModalFaktorUji()">Close</button>
+                        <button type="button" class="btn btn-primary" ng-disabled="false" ng-click="eventClickSaveFaktorUji()">Save</button>
                     </div>
                 </div>
             </div>

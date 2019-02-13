@@ -16,7 +16,7 @@
     <script type='text/javascript' src="https://unpkg.com/css-element-queries@^0.4.0/src/ResizeSensor.js"></script>
 
     <script type='text/javascript' src="https://unpkg.com/jsplumb@^2.3.2"></script>
-
+    <link rel="stylesheet" href="./plugins/jvectormap/jquery-jvectormap.css">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/font-awesome@^4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/bootstrap@^3.3.7/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -25,9 +25,10 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/angular-gantt@latest/dist/angular-gantt.css">
 
     <script type='text/javascript' src="script.js"></script>
+    <script src="./http-request.js"></script>
 </head>
 
-<body ng-app="plnkrGanttStable">
+<body ng-app="app">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -35,7 +36,7 @@
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Dashboard</a></li>
-                <li><a href="project">Project</a></li>
+                <li><a href="#!/project">Project</a></li>
 
             </ul>
         </div>
@@ -44,7 +45,16 @@
     </div>
 </body>
 
+
 <script src="./controllers/projectCtrl.js"></script>
-<!-- <script src="./http-request.js"></script> -->
+
+
+
+<!-- Angular Loading Bar -->
+<script src="./plugins/loader/nprogress.js"></script>
+<link href="./plugins/loader/nprogress.css" rel='stylesheet' />
+
+<script src="./plugins/jquery/dist/jquery.min.js"></script>
+<script src="./plugins/bootstrap/dist/js/bootstrap.min.js"></script>
 
 </html>

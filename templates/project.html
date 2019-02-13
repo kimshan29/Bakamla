@@ -1,0 +1,469 @@
+<div class="content ">
+    <div style="margin-top: 20%;">
+        <p class="text-center">
+            <img class="blink-image" src="../icons/loading.ico">
+        </p>
+        <!-- <p class="text-center">Loading......</p> -->
+
+    </div>
+</div>
+<div class="page-form">
+    <section class="content-header" ng-show="masterIndikator">
+        <h1>
+            Project
+            <!-- <small>advanced tables</small> -->
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> Home</li>
+            <!-- <li><a href="#"></a></li> -->
+            <li class="active">Project</li>
+        </ol>
+    </section>
+    <section class="content" ng-show="masterIndikator">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <!-- <h3 class="box-title">Table</h3> -->
+                        <form class="form-inline pull-right">
+                            <div class="form-group">
+                                <label>Search</label>
+                                <input type="text" ng-model="search" class="form-control" placeholder="Search">
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="thead-gcg">
+                                <tr>
+                                    <th class="text-center">No.</th>
+                                    <th class="text-center">Project</th>
+                                    <th class="text-center">Keterangan</th>
+                                    <th class="text-center">PIC</th>
+                                    <th class="text-center">Tanggal Mulai</th>
+                                    <th class="text-center">Tanggal Selesai</th>
+                                    <th class="text-center">Progress %</th>
+                                    <th class="text-center">Anggaran</th>
+                                    <th class="text-center judul-action">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="item in listProject |filter:search|itemsPerPage:pageSize" current-page="currentPage">
+                                    <td class="text-center">{{pageSize * (currentPage-1)+$index+1}}</td>
+                                    <td>{{item.namaProject }}</td>
+                                    <td class="text-center">{{item.keterangan}}</td>
+                                    <td class="text-center">{{item.pic}}</td>
+                                    <td class="text-center">{{item.tglMulai}}</td>
+                                    <td class="text-center">{{item.tglSelesai}}</td>
+                                    <td class="text-right">
+                                        {{item.progress}}
+                                    </td>
+                                    <td class="text-right">{{item.anggaran | number:0}}</td>
+                                    <td class="text-center">
+                                        <button type='button' class='btn btn-success btn-sm' ng-click="eventClickViewKegiatan(item.id)">
+                                            <span class='fa fa-search'></span> View Kegiatan
+                                        </button>
+                                        <button type='button' class='btn btn-info btn-sm' ng-click="eventClickEdit(item.id)">
+                                            <span class='fa fa-pencil'></span> Edit
+                                        </button>
+                                        <button type='button' class='btn btn-danger btn-sm' ng-click="eventClickHapus(item.id, item.username + ' ( ' + item.email + ' )')">
+                                            <span class='fa fa-times-circle'></span> Hapus
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <dir-pagination-controls class="pull-right" boundary-links="true" direction-links="true">
+                        </dir-pagination-controls>
+                        <div class="col-md-12 text-left">
+                            <button data-toggle="modal" ng-click="eventClickAdd()" ng-hide="akses" data-target="#myModalIndikator" data-backdrop="static" data-keyboard="false" type="button" class="btn btn-default btn-circle btn-lg" style="color : white;background: #2d4283; border-color: #2d4283;  box-shadow: 0px 0px 31px 6px rgba(0, 0, 0, 0.17);">
+                                <i class="fa fa-plus faa-pulse animated"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModalIndikator" role="dialog">
+            <div class="modal-dialog" style="width: 50%">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">
+                            <b>Tambah Project</b>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" name="myformProject">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Nama Project</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="formProject.id" ng-hide="true">
+                                    <textarea class="form-control" ng-model="formProject.indikator"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Keterangan</label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" ng-model="formProject.indikator"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Nama Project</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="formProject.id" ng-hide="true">
+                                    <textarea class="form-control" ng-model="formProject.indikator"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Status Indikator</label>
+                                <div class="col-md-8">
+                                    <label class="container-checkbox" style="font-weight:400 !important">
+                                        <input type="checkbox" ng-model="formProject.isActive"><span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-delete" data-dismiss="modal" ng-click="eventClickCloseModal()">Close</button>
+                        <button type="button" class="btn btn-save" ng-disabled="!myformProject.$valid" ng-click="eventClickSaveIndikator()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Parameter -->
+    <section class="content-header" ng-show="masterParameter">
+        <h1>
+            Kegiatan
+            <!-- <small>advanced tables</small> -->
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> Home</li>
+            <!-- <li><a href="#"></a></li> -->
+            <li class="active"> Kegiatan</li>
+        </ol>
+    </section>
+    <section class="content" ng-show="masterParameter">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <!-- <h3 class="box-title">Table</h3> -->
+                        <form class="form-inline pull-right">
+                            <div class="form-group">
+                                <label>Search</label>
+                                <input type="text" ng-model="search" class="form-control" placeholder="Search">
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <label ng-hide="true">{{idKegiatan}}</label>
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="thead-gcg">
+                                <tr>
+                                    <th class="text-center">No.</th>
+                                    <th class="text-center">Project</th>
+                                    <th class="text-center">Kegiatan</th>
+                                    <th class="text-center">Keterangan</th>
+                                    <th class="text-center">PIC</th>
+                                    <th class="text-center">Tanggal Mulai</th>
+                                    <th class="text-center">Tanggal Selesai</th>
+                                    <th class="text-center">Progress %</th>
+                                    <th class="text-center">Anggaran</th>
+                                    <th class="text-center" ng-hide="akses">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="item in listKegiatan |filter:search|itemsPerPage:pageSize" current-page="currentPage">
+                                    <td class="text-center">{{pageSize * (currentPage-1)+$index+1}}</td>
+                                    <td class="">{{item.namaProject}}</td>
+                                    <td class="">{{item.kegiatan}}</td>
+                                    <td class="text-center">{{item.keterangan}}</td>
+                                    <td class="text-center">{{item.pic}}</td>
+                                    <td class="text-center">{{item.tglMulai}}</td>
+                                    <td class="text-center">{{item.tglSelesai}}</td>
+                                    <td class="text-right">
+                                        {{item.progress}}
+                                    </td>
+                                    <td class="text-right">{{item.anggaran | number:0}}</td>
+                                    <td class="text-center" ng-hide="akses">
+                                        <button type='button' class='btn btn-success btn-sm' ng-hide="akses" ng-click="eventClickViewFaktorUji(item.id)">
+                                            <span class='fa fa-search'></span> View Sub Kegiatan
+                                        </button>
+                                        <button type='button' class='btn btn-edit btn-sm' ng-hide="akses" ng-click="eventClickEditParameter(item.id)">
+                                            <span class='fa fa-pencil'></span> Edit
+                                        </button>
+                                        <button type='button' class='btn btn-delete btn-sm' ng-hide="akses" ng-click="eventClickHapusParameter(item.id, idIndikator)">
+                                            <span class='fa fa-times-circle'></span> Hapus
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <dir-pagination-controls class="pull-right" boundary-links="true" direction-links="true">
+                        </dir-pagination-controls>
+                        <div class="col-md-12 text-left">
+                            <button data-toggle="modal" ng-hide="akses" ng-click="eventClickAddParameter(idIndikator)" data-target="#myModalParameter" data-backdrop="static" data-keyboard="false" type="button" class="btn btn-default btn-circle btn-lg" style="color : white;background: #2d4283; border-color: #2d4283;  box-shadow: 0px 0px 31px 6px rgba(0, 0, 0, 0.17);">
+                                <i class="fa fa-plus faa-pulse animated"></i>
+                            </button>
+                            <button type='button' style="border-radius:12px;" class='btn btn-success btn-md' ng-hide="akses" ng-click="eventClickMasterIndikator()">
+                                List Project
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Parameter-->
+        <div class="modal fade" id="myModalParameter" role="dialog">
+            <div class="modal-dialog" style="width: 50%">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">
+                            <b>Tambah Parameter Assessment</b>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" name="myFormParameter">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Indikator</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="formParameter.id" ng-hide="true">
+                                    <input type="text" class="form-control" ng-model="formParameter.idIndikator" ng-hide="true">
+                                    <textarea type="text" class="form-control" ng-model="formParameter.indikator" ng-disabled="true"></textarea>
+                                    <!-- <select class="form-control" required ng-model="formParameter.indikator" ng-options="item as item.indikator for item in listMasterIndikator">
+                                    </select> -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">No Parameter</label>
+                                <div class="col-md-8">
+                                    <input type="number" class="form-control" ng-model="formParameter.noParameter">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Parameter</label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" ng-model="formParameter.parameter"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Status Parameter</label>
+                                <div class="col-md-8">
+                                    <label class="container-checkbox" style="font-weight:400 !important">
+                                        <input type="checkbox" ng-model="formParameter.isActive"><span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-delete" data-dismiss="modal" ng-click="eventClickCloseModalParameter()">Close</button>
+                        <button type="button" class="btn btn-save" ng-disabled="!myFormParameter.$valid" ng-click="eventClickSaveParameter()">Save</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Form Faktor Uji -->
+    <section class="content-header" ng-show="masterFaktorUji">
+        <h1>
+            Sub Kegiatan
+            <!-- <small>advanced tables</small> -->
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> Home</li>
+            <!-- <li><a href="#"></a></li> -->
+            <li class="active">Sub Kegiatan</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row" ng-show="masterFaktorUji">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <!-- <h3 class="box-title">Table</h3> -->
+                        <form class="form-inline pull-right">
+                            <div class="form-group">
+                                <label>Search</label>
+                                <input type="text" ng-model="search" class="form-control" placeholder="Search">
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <label ng-hide="true">{{idIndikator}}</label>
+                        <label ng-hide="true">{{idParameter}}</label>
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="thead-gcg">
+                                <tr>
+                                    <th class="text-center">No.</th>
+                                    <th class="text-center">Indikator</th>
+                                    <th class="text-center">Parameter</th>
+                                    <th class="text-center">No Faktor Uji</th>
+                                    <th class="text-center">Faktor Uji</th>
+                                    <th class="text-center" style="width:12%" ng-hide="akses">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="item in listFaktorUji |filter:search|itemsPerPage:pageSize" current-page="currentPage">
+                                    <td class="text-center">{{pageSize * (currentPage-1)+$index+1}}</td>
+                                    <td class="">{{item.indikator}}</td>
+                                    <td class="">{{item.parameter}}</td>
+                                    <td class="">{{item.noFaktorUji}}</td>
+                                    <td class="">{{item.faktorUji}}</td>
+                                    <td class="text-center" ng-hide="akses">
+                                        <button type='button' class='btn btn-edit btn-sm' ng-hide="akses" ng-click="eventClickEditFaktorUji(item.id)">
+                                            <span class='fa fa-pencil'></span> Edit
+                                        </button>
+                                        <button type='button' class='btn btn-delete btn-sm' ng-hide="akses" ng-click="eventClickHapusFaktorUji(item.id, idParameter)">
+                                            <span class='fa fa-times-circle'></span> Hapus
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <dir-pagination-controls class="pull-right" boundary-links="true" direction-links="true">
+                        </dir-pagination-controls>
+                        <div class="col-md-12 text-left">
+                            <button data-toggle="modal" ng-hide="akses" ng-click="eventClickAddFaktorUji(idIndikator,idParameter)" data-target="#myModalFaktorUji" data-backdrop="static" data-keyboard="false" type="button" class="btn btn-default btn-circle btn-lg" style="color : white;background: #2d4283; border-color: #2d4283;  box-shadow: 0px 0px 31px 6px rgba(0, 0, 0, 0.17);">
+                                <i class="fa fa-plus faa-pulse animated"></i>
+                            </button>
+                            <button type='button' class='btn btn-success btn-md' style="border-radius:12px;" ng-hide="akses" ng-click="eventClickKegiatan(idIndikator)">
+                                List Kegiatan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Faktor Uji-->
+        <div class="modal fade" id="myModalFaktorUji" role="dialog">
+            <div class="modal-dialog" style="width: 90%">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">
+                            <b>Tambah Faktor Uji Assessment</b>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" name="">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Indikator</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" ng-model="formFaktorUji.id" ng-hide="true">
+                                    <input type="text" class="form-control" ng-model="formFaktorUji.idParameter" ng-hide="true">
+                                    <textarea type="text" class="form-control" ng-model="formFaktorUji.indikator" ng-disabled="true"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Parameter</label>
+                                <div class="col-md-8">
+                                    <textarea type="text" class="form-control" ng-model="formFaktorUji.parameter" ng-disabled="true"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">No Faktor Uji</label>
+                                <div class="col-md-8">
+                                    <input type="number" class="form-control" ng-model="formFaktorUji.noFaktorUji">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Faktor Uji</label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" ng-model="formFaktorUji.faktorUji"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">PIC</label>
+                                <!-- <div class="col-md-6 ng-binding"> -->
+                                <div class="col-md-6 ng-binding">
+                                    <input type="text" required name="pic" ng-model="formFaktorUji.pic" placeholder="" uib-typeahead="item as item.nama for item in renderPIC($viewValue)" typeahead-loading="loadingECPIC" typeahead-no-results="noResultsPic" class="form-control" typeahead-min-length="3" typeahead-editable="true" typeahead-show-hint="true" typeahead-wait-ms="0" typeahead-input-formatter="$model.nama" />
+
+                                    <i ng-show="loadingEC" class="glyphicon glyphicon-refresh"></i>
+                                    <div ng-show="noResultsPICr">
+                                        <i class="glyphicon glyphicon-remove"></i> No Results Found
+                                    </div>
+                                    <!-- <input type="text" class="form-control" ng-model="SO.input.PIC"> -->
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" ng-disabled="formFaktorUji.pic == null || formFaktorUji.pic == ''" class="btn btn-primary btn-sm" ng-click="eventClickAddPIC(); eventClickHapusPICAll()">
+                                        <i class="fa fa-plus-square"></i>
+                                        Tambah PIC
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-8">
+                                    <table class="table table-bordered">
+                                        <thead class="bg-primary">
+                                            <tr>
+                                                <th class="bg-blue color-white text-center">No.</th>
+                                                <th>PIC</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in formFaktorUji.dataPic">
+                                                <td class="text-center">{{ $index+1 }}.</td>
+                                                <td>{{item.nama}}</td>
+                                                <!-- <td>{{s}}</td> -->
+                                                <td class="text-center">
+                                                    <a class='btn btn-danger' href='' ng-click='eventClickHapusPIC($index)'><span class="glyphicon glyphicon-trash">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group hideInstansi">
+                                <label class="col-md-4 control-label">Syarat Pemenuhan</label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" name="deskripsi" ng-model="formFaktorUji.syaratPemenuhan"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Reminder</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" ng-model="formFaktorUji.reminder.id" ng-options="item.id as item.reminder_name +' - '+ item.keterangan for item in listReminder">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Status Faktor Uji</label>
+                                <div class="col-md-8">
+                                    <label class="container-checkbox" style="font-weight:400 !important">
+                                        <input type="checkbox" ng-model="formFaktorUji.isActive"><span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-delete" data-dismiss="modal" ng-click="eventClickCloseModalFaktorUji()">Close</button>
+                        <button type="button" class="btn btn-save" ng-disabled="false" ng-click="eventClickSaveFaktorUji()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
